@@ -57,7 +57,10 @@ namespace FSIV
     }
 
     /** @brief Returns cutoff frequency saved **/
-    double getCutOffFrequency() const;
+    inline double getCutOffFrequency() const
+    {
+      return _cutoffFrequency;
+    }
 
     /** @brief Returns butterworth order **/
     unsigned short int getOrderButterworth() const;
