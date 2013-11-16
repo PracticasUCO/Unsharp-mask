@@ -69,7 +69,10 @@ namespace FSIV
     }
 
     /** @brief Returns gain enhancement **/
-    double getGain();
+    inline double getGain() const
+    {
+      return _gain;
+    }
   }
 }
 
