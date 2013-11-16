@@ -2,6 +2,7 @@
 #define __UNSHARP_MASK__
 
 #include <opencv2/core/core.hpp>
+#include <cassert>
 
 namespace FSIV
 {
@@ -28,7 +29,12 @@ namespace FSIV
     /** @brief Sets cutoff frequency
 	@param cutoff Cutoff frequency
     **/
-    void setCutOffFrequency(double cutoff);
+    inline void setCutOffFrequency(double cutoff)
+    {
+      assert((cutoff >= 0) && (cutoff <= 1));
+
+      _cutoffFrequency = cutoff;
+    }
 
     /** @brief Sets order Butterworth filter 
 	@param order Order butterworth filter
