@@ -39,7 +39,12 @@ namespace FSIV
     /** @brief Sets order Butterworth filter 
 	@param order Order butterworth filter
     **/
-    void setOrderButterworth(unsigned short int order);
+    inline void setOrderButterworth(unsigned short int order)
+    {
+      assert((order >= 1) && (order <= 10));
+
+      _orderButterworth = order;
+    }
 
     /** @brief Sets gain enhancement
 	@param gain Gain enhancement
