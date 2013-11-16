@@ -18,7 +18,7 @@ namespace FSIV
     unsigned short int _orderButterworth; //!< Order Butterworth filter
     double _gain; //!< Gain enhancement
 
-    void frequencyTransform(Mat &picture, const enum fourierTransform &direction);
+    cv::Mat frequencyTransform(Mat &picture, const enum fourierTransform &direction);
 
   public:
     /** @brief Default Constructor
