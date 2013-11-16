@@ -18,7 +18,12 @@ namespace FSIV
 	@param orderButterWorth Order ButterWorth filter, default 2
 	@param gain, Gain enhancement, default 1
     **/
-    inline UnsharpMask(double cutoff = 0.5, unsigned short int orderButterWorth = 2, double gain = 1);
+    inline UnsharpMask(double cutoff = 0.5, unsigned short int orderButterWorth = 2, double gain = 1)
+    {
+      this->setCutOffFrequency(cutoff);
+      this->setOrderButterworth(orderButterWorth);
+      this->setGain(gain);
+    }
 
     /** @brief Sets cutoff frequency
 	@param cutoff Cutoff frequency
