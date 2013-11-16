@@ -63,7 +63,10 @@ namespace FSIV
     }
 
     /** @brief Returns butterworth order **/
-    unsigned short int getOrderButterworth() const;
+    inline unsigned short int getOrderButterworth() const
+    {
+      return _orderButterworth;
+    }
 
     /** @brief Returns gain enhancement **/
     double getGain();
