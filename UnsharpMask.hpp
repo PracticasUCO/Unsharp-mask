@@ -49,7 +49,12 @@ namespace FSIV
     /** @brief Sets gain enhancement
 	@param gain Gain enhancement
     **/
-    void setGain(double gain);
+    inline void setGain(double gain)
+    {
+      assert((gain >= 0) && (gain <= 5));
+
+      _gain = gain;
+    }
 
     /** @brief Returns cutoff frequency saved **/
     double getCutOffFrequency() const;
