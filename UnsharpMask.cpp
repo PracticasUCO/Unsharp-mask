@@ -70,6 +70,26 @@ namespace FSIV
       }
     else
       {
+	Mat temp;
+	resultado = picture.clone();
+	
+	int cx = resultado.cols/2;
+	int cy = resultado.rows/2;
+
+	Mat q0(resultado, Rect(0, 0, cx, cy));
+	Mat q1(resultado, Rect(cx, 0, cx, cy));
+	Mat q2(resultado, Rect(0, cy, cx, cy));
+	Mat q3(resultado, Rect(cx, cy, cx, cy));
+
+	q0.copyTo(tmp);
+	q3.copyTo(q0);
+	tmp.copyTo(q3);
+
+	q1.copyTo(tmp);
+	q2.copyTo(q1);
+	tmp.copyTo(q2);
+
+	dft(result, result, DFT_INVERSE);
       }
     return result;
   }
