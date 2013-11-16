@@ -1,4 +1,5 @@
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <cassert>
 #include "UnsharpMask.hpp"
 
@@ -7,7 +8,7 @@ using namespace cv;
 
 namespace FSIV
 {
-  cv::Mat frequencyTransform(const Mat &picture, const enum fourierTransform &direction);
+  cv::Mat UnsharpMask::frequencyTransform(const Mat &picture, const enum fourierTransform &direction)
   {
     Mat result;
 
@@ -23,7 +24,7 @@ namespace FSIV
 	optimalCols = getOptimalDFTSize(picture.cols);
 
 	//Now picture will be padded
-	copyMakeBorder(picture, padded, 0, optimalRows - picture.rows, optimalCols - picture.cols, BORDER_CONSTANT, Scalar::all(0));
+	copyMakeBorder(picture, padded, 0, optimalRows - picture.rows, optimalCols - picture.cols, BORDER_CONSTANT, 0);
 	
 	// Make place for both the complex and the real values.
 	Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
@@ -65,7 +66,7 @@ namespace FSIV
 
 	// Normalize
 	normalize(magI, magI, 0, 1, CV_MINMAX);
-	result = magI.copy();
+	result = magI.clone();
       }
     else
       {

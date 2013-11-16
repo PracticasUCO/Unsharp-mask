@@ -9,7 +9,7 @@ using namespace cv;
 
 namespace FSIV
 {
-  enum fourierTransform { SPATIAL_DOMAIN, FREQUENCY_DOMAIN }
+  enum fourierTransform { SPATIAL_DOMAIN, FREQUENCY_DOMAIN };
 
   class UnsharpMask
   {
@@ -18,7 +18,7 @@ namespace FSIV
     unsigned short int _orderButterworth; //!< Order Butterworth filter
     double _gain; //!< Gain enhancement
 
-    cv::Mat frequencyTransform(Mat &picture, const enum fourierTransform &direction);
+    cv::Mat frequencyTransform(const Mat &picture, const enum fourierTransform &direction);
 
   public:
     /** @brief Default Constructor
@@ -80,7 +80,7 @@ namespace FSIV
     {
       return _gain;
     }
-  }
+  };
 }
 
 #endif
