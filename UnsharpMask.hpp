@@ -4,6 +4,9 @@
 #include <opencv2/core/core.hpp>
 #include <cassert>
 
+using namespace std;
+using namespace cv;
+
 namespace FSIV
 {
   class UnsharpMask
@@ -12,6 +15,8 @@ namespace FSIV
     double _cutoffFrequency; //!<Cutoff frequency
     unsigned short int _orderButterworth; //!< Order Butterworth filter
     double _gain; //!< Gain enhancement
+
+    void frequencyTransform(Mat &picture);
 
   public:
     /** @brief Default Constructor
