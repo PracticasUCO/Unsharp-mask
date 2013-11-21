@@ -23,17 +23,17 @@ namespace FSIV
 	int cx = result.cols/2;
 	int cy = result.rows/2;
 
-	Mat q0(result, Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
+	Mat q0(result, Rect(0, 0, cx, cy));   // Top-Left
 	Mat q1(result, Rect(cx, 0, cx, cy));  // Top-Right
 	Mat q2(result, Rect(0, cy, cx, cy));  // Bottom-Left
 	Mat q3(result, Rect(cx, cy, cx, cy)); // Bottom-Right
 
-	Mat tmp;                           // swap quadrants (Top-Left with Bottom-Right)
+	Mat tmp; 
 	q0.copyTo(tmp);
 	q3.copyTo(q0);
 	tmp.copyTo(q3);
 
-	q1.copyTo(tmp);                    // swap quadrant (Top-Right with Bottom-Left)
+	q1.copyTo(tmp);
 	q2.copyTo(q1);
 	tmp.copyTo(q2);
       }
@@ -44,17 +44,17 @@ namespace FSIV
 	int cx = ifft.cols/2;
 	int cy = ifft.rows/2;
 
-	Mat q0(ifft, Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
+	Mat q0(ifft, Rect(0, 0, cx, cy));   // Top-Left
 	Mat q1(ifft, Rect(cx, 0, cx, cy));  // Top-Right
 	Mat q2(ifft, Rect(0, cy, cx, cy));  // Bottom-Left
 	Mat q3(ifft, Rect(cx, cy, cx, cy)); // Bottom-Right
 
-	Mat tmp;                           // swap quadrants (Top-Left with Bottom-Right)
+	Mat tmp;
 	q0.copyTo(tmp);
 	q3.copyTo(q0);
 	tmp.copyTo(q3);
 
-	q1.copyTo(tmp);                    // swap quadrant (Top-Right with Bottom-Left)
+	q1.copyTo(tmp);
 	q2.copyTo(q1);
 	tmp.copyTo(q2);
 
