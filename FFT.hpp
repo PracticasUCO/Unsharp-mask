@@ -16,7 +16,8 @@ public:
 	
 	/** @brief Copy Constructor
 	 *  @param f FFT to be copied
-	
+	 * **/
+	FFT(const FFT &f);
 	/**
 	 * @brief Set up a picture to be transformed
 	 * @param picture Picture to be transformed
