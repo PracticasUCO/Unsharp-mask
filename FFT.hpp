@@ -49,6 +49,10 @@ public:
 	 * **/
 	Mat getPicture() const;
 	
+	/**
+	 * @brief Set a FFT picture **/
+	void setFFT(const Mat &fft = cv::Mat());
+	
 private:
 	Mat _picture;
 	Mat _fft;
