@@ -1,6 +1,11 @@
 #include <opencv2/core/core.hpp>
 #include <cassert>
+#include <vector>
+#include <opencv2/highgui/highgui.hpp>
 #include "FFT.hpp"
+
+using namespace std;
+using namespace cv;
 
 FFT::FFT(const Mat &picture = Mat())
 {
@@ -82,5 +87,23 @@ void FFT::inverseFFT()
 		this->setPicture(fft);
 		_fft = fftCopy.clone();
 	}
+}
+
+void FFT::showFFT()
+{
+	assert(!_fft.empty());
+	
+	Mat fft = this->getFFT();
+	
+	vector<Mat> planes;
+	
+	split(fft, planes);
+	
+	magnitude(planes[0], planes[1], planes[0]);
+	planes[0] += Scalar::all(1);
+	log(planes[0], planes[0]);
+	normailize(planes[0], planes[0], 0, 1, CV_MINMAX);
+	
+	imshow("Espectro", planes[0]);
 }
 
