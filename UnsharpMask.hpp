@@ -22,10 +22,11 @@ namespace FSIV
     cv::Mat frequencyTransform(const Mat &picture, const enum fourierTransform &direction);
 
   public:
-    /** @brief Default Constructor
-	@param cutoff Cutoff frequency, default 0.5
-	@param orderButterWorth Order ButterWorth filter, default 2
-	@param gain, Gain enhancement, default 1
+    /** 
+	  * @brief Default Constructor
+	  * @param cutoff Cutoff frequency, default 0.5
+	  * @param orderButterWorth Order ButterWorth filter, default 2
+	  * @param gain, Gain enhancement, default 1
     **/
     inline UnsharpMask(double cutoff = 0.5, unsigned short int orderButterWorth = 2, double gain = 1)
     {
@@ -35,7 +36,7 @@ namespace FSIV
     }
 
     /** @brief Sets cutoff frequency
-	@param cutoff Cutoff frequency
+	   * @param cutoff Cutoff frequency
     **/
     inline void setCutOffFrequency(double cutoff)
     {
@@ -45,7 +46,7 @@ namespace FSIV
     }
 
     /** @brief Sets order Butterworth filter 
-	@param order Order butterworth filter
+	   * @param order Order butterworth filter
     **/
     inline void setOrderButterworth(unsigned short int order)
     {
@@ -55,7 +56,7 @@ namespace FSIV
     }
 
     /** @brief Sets gain enhancement
-	@param gain Gain enhancement
+	   * @param gain Gain enhancement
     **/
     inline void setGain(double gain)
     {
