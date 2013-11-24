@@ -11,3 +11,9 @@ FFT::FFT(const FFT &f)
 	this->setPicture(f.getPicture());
 	_fft = f.getFFT();
 }
+
+void FFT::setPicture(const Mat &picture = Mat())
+{
+	_picture = picture.clone();
+	_fft.release();
+}
