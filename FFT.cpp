@@ -89,7 +89,7 @@ void FFT::inverseFFT()
 	}
 }
 
-void FFT::showFFT()
+void FFT::show()
 {
 	assert(!_fft.empty());
 	

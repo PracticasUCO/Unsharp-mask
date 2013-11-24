@@ -37,7 +37,7 @@ public:
 	/**
 	 * @brief Show picture's fft
 	 * **/
-	void showFFT();
+	void show();
 	
 	/**
 	 * @brief Return fft's copy
