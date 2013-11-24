@@ -107,3 +107,13 @@ void FFT::show()
 	imshow("Espectro", planes[0]);
 }
 
+Mat FFT::getFFT()
+{
+	return _fft.copy();
+}
+
+Mat getPicture()
+{
+	return _picture.copy();
+}
+
