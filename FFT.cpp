@@ -104,6 +104,7 @@ void FFT::show() const
 	planes[0] += Scalar::all(1);
 	log(planes[0], planes[0]);
 	normalize(planes[0], planes[0], 0, 1, CV_MINMAX);
+	fft.convertTo(fft, CV_8U);
 	
 	imshow("Espectro", planes[0]);
 }
