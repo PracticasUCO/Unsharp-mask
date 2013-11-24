@@ -119,3 +119,9 @@ Mat FFT::getPicture() const
 	return _picture.clone();
 }
 
+void FFT::setFFT(const Mat &fft = cv::Mat())
+{
+	_fft = fft.clone();
+	
+	this->inverseFFT();
+}
