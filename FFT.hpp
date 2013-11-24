@@ -12,7 +12,7 @@ public:
 	 * @brief Default constructor
 	 * @param picture Picture to be transformed
 	 * **/
-	FFT(const Mat &picture = Mat());
+	FFT(const Mat &picture = cv::Mat());
 	
 	/** @brief Copy Constructor
 	 *  @param f FFT to be copied
@@ -22,7 +22,7 @@ public:
 	 * @brief Set up a picture to be transformed
 	 * @param picture Picture to be transformed
 	 * **/
-	void setPicture(const Mat &picture = Mat());
+	void setPicture(const Mat &picture = cv::Mat());
 	
 	/**
 	 * @brief Do transformation
@@ -37,17 +37,17 @@ public:
 	/**
 	 * @brief Show picture's fft
 	 * **/
-	void show();
+	void show() const;
 	
 	/**
 	 * @brief Return fft's copy
 	 * **/
-	Mat getFFT();
+	Mat getFFT() const;
 	
 	/**
 	 * @brief Return picture
 	 * **/
-	Mat getPicture();
+	Mat getPicture() const;
 	
 private:
 	Mat _picture;

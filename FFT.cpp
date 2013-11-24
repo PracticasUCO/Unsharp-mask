@@ -7,18 +7,19 @@
 using namespace std;
 using namespace cv;
 
-FFT::FFT(const Mat &picture = Mat())
+FFT::FFT(const Mat &picture)
 {
 	this->setPicture(picture);
 }
 
 FFT::FFT(const FFT &f)
 {
-	this->setPicture(f.getPicture());
+	Mat tmp = f.getPicture();
+	this->setPicture(tmp);
 	_fft = f.getFFT();
 }
 
-void FFT::setPicture(const Mat &picture = Mat())
+void FFT::setPicture(const Mat &picture)
 {
 	_picture = picture.clone();
 	_fft.release();
@@ -83,13 +84,13 @@ void FFT::inverseFFT()
 		tmp.copyTo(q2);
 
 		dft(fft, fft, cv::DFT_INVERSE|cv::DFT_REAL_OUTPUT);
-		fft.convertTo(result, CV_8U);
+		fft.convertTo(fft, CV_8U);
 		this->setPicture(fft);
 		_fft = fftCopy.clone();
 	}
 }
 
-void FFT::show()
+void FFT::show() const
 {
 	assert(!_fft.empty());
 	
@@ -102,18 +103,18 @@ void FFT::show()
 	magnitude(planes[0], planes[1], planes[0]);
 	planes[0] += Scalar::all(1);
 	log(planes[0], planes[0]);
-	normailize(planes[0], planes[0], 0, 1, CV_MINMAX);
+	normalize(planes[0], planes[0], 0, 1, CV_MINMAX);
 	
 	imshow("Espectro", planes[0]);
 }
 
-Mat FFT::getFFT()
+Mat FFT::getFFT() const
 {
-	return _fft.copy();
+	return _fft.clone();
 }
 
-Mat getPicture()
+Mat FFT::getPicture() const
 {
-	return _picture.copy();
+	return _picture.clone();
 }
 
