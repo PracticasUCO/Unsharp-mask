@@ -119,9 +119,35 @@ Mat FFT::getPicture() const
 	return _picture.clone();
 }
 
-void FFT::setFFT(const Mat &fft = cv::Mat())
+void FFT::setFFT(const Mat &fft)
 {
 	_fft = fft.clone();
 	
 	this->inverseFFT();
+}
+
+void FFT::setFrequency(const unsigned int &fil, const unsigned int &col, const float &frequency)
+{
+	assert(fil < this->getRows());
+	assert(col < this->getCols());
+	
+	_fft.at<float>(fil, col) = frequency;
+}
+
+float FFT::getFrequency(const unsigned int &fil, const unsigned int &col) const
+{
+	assert(fil < this->getRows());
+	assert(col < this->getCols());
+	
+	return _fft.at<float>(fil, col);
+}
+
+unsigned int FFT::getRows() const
+{
+	return static_cast<unsigned int>(_fft.rows);
+}
+
+unsigned int FFT::getCols() const
+{
+	return static_cast<unsigned int>(_fft.cols);
 }

@@ -53,6 +53,26 @@ public:
 	 * @brief Set a FFT picture **/
 	void setFFT(const Mat &fft = cv::Mat());
 	
+	/**
+	 * @brief Set a frequency pixel
+	 * **/
+	void setFrequency(const unsigned int &fil, const unsigned int &col, const float &frequency);
+	
+	/**
+	 * @brief Get a frequency pixel
+	 * **/
+	float getFrequency(const unsigned int &fil, const unsigned int &col) const;
+	
+	/**
+	 * @brief Return fft's rows
+	 * **/
+	unsigned int getRows() const;
+	
+	/**
+	 * @brief Return fft's cols
+	 * **/
+	unsigned int getCols() const;
+	
 private:
 	Mat _picture;
 	Mat _fft;
