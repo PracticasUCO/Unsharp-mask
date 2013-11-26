@@ -126,20 +126,34 @@ void FFT::setFFT(const Mat &fft)
 	this->inverseFFT();
 }
 
-void FFT::setFrequency(const unsigned int &fil, const unsigned int &col, const float &frequency)
+void FFT::setFrequency(const unsigned int &fil, const unsigned int &col, const enum COMPLEX_NUMBER &part, const float &frequency)
 {
 	assert(fil < this->getRows());
 	assert(col < this->getCols());
 	
-	_fft.at<float>(fil, col) = frequency;
+	if(part == REAL)
+	{
+		_fft.at<float>(fil, col, 0) = frequency;
+	}
+	else
+	{
+		_fft.at<float>(fil, col, 1) = frequency;
+	}
 }
 
-float FFT::getFrequency(const unsigned int &fil, const unsigned int &col) const
+float FFT::getFrequency(const unsigned int &fil, const unsigned int &col, const enum COMPLEX_NUMBER &part) const
 {
 	assert(fil < this->getRows());
 	assert(col < this->getCols());
 	
-	return _fft.at<float>(fil, col);
+	if(part == REAL)
+	{
+		return _fft.at<float>(fil, col, 0);
+	}
+	else
+	{
+		return _fft.at<float>(fil, col, 1);
+	}
 }
 
 unsigned int FFT::getRows() const

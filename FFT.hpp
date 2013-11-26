@@ -5,6 +5,8 @@
 
 using namespace cv;
 
+enum COMPLEX_NUMBER { COMPLEX, REAL };
+
 class FFT
 {
 public:
@@ -56,12 +58,12 @@ public:
 	/**
 	 * @brief Set a frequency pixel
 	 * **/
-	void setFrequency(const unsigned int &fil, const unsigned int &col, const float &frequency);
+	void setFrequency(const unsigned int &fil, const unsigned int &col, const enum COMPLEX_NUMBER &part, const float &frequency);
 	
 	/**
 	 * @brief Get a frequency pixel
 	 * **/
-	float getFrequency(const unsigned int &fil, const unsigned int &col) const;
+	float getFrequency(const unsigned int &fil, const unsigned int &col, const enum COMPLEX_NUMBER &part) const;
 	
 	/**
 	 * @brief Return fft's rows
