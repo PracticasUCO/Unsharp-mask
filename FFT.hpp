@@ -75,6 +75,13 @@ public:
 	 * **/
 	unsigned int getCols() const;
 	
+	/**
+	 * @brief Libera la imagen y la transformada de fourier **/
+	void release();
+	
+	/** Sobrecarga del constructor = **/
+	FFT& operator=(const FFT & f);
+	
 private:
 	Mat _picture;
 	Mat _fft;

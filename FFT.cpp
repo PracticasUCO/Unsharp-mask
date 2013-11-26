@@ -16,13 +16,13 @@ FFT::FFT(const FFT &f)
 {
 	Mat tmp = f.getPicture();
 	this->setPicture(tmp);
-	_fft = f.getFFT();
+	this->setFFT(f.getFFT());
 }
 
 void FFT::setPicture(const Mat &picture)
 {
+	this->release();
 	_picture = picture.clone();
-	_fft.release();
 }
 
 void FFT::doFFT()
@@ -53,7 +53,7 @@ void FFT::doFFT()
 		q2.copyTo(q1);
 		tmp.copyTo(q2);
 		
-		_fft = fft.clone();
+		this->setFFT(fft);
 	}
 }
 
@@ -164,4 +164,17 @@ unsigned int FFT::getRows() const
 unsigned int FFT::getCols() const
 {
 	return static_cast<unsigned int>(_fft.cols);
+}
+
+void FFT::release()
+{
+	_fft.release();
+	_picture.release();
+}
+
+FFT& FFT::operator=(const FFT & f)
+{
+	this->setPicture(f.getPicture());
+	this->setFFT(f.getFFT());
+	return *this;
 }
