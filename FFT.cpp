@@ -3,7 +3,6 @@
 #include <vector>
 #include <opencv2/highgui/highgui.hpp>
 #include "FFT.hpp"
-#include <iostream>
 
 using namespace std;
 using namespace cv;
@@ -228,4 +227,9 @@ bool FFT::operator==(const FFT & f)
 		}
 	}
 	return resultado;
+}
+
+bool FFT::operator!=(const FFT & f)
+{
+	return !(*this == f);
 }

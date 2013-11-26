@@ -84,6 +84,8 @@ public:
 
 	bool operator==(const FFT & f);
 	
+	bool operator!=(const FFT & f);
+	
 private:
 	Mat _picture;
 	Mat _fft;
