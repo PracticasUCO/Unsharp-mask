@@ -2,6 +2,7 @@
 #include <cassert>
 #include <vector>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include "FFT.hpp"
 
 using namespace std;
@@ -34,27 +35,35 @@ void FFT::doFFT()
 	if(picture.channels() == 1)
 	{
 		picture.convertTo(fft, CV_32F);
-		dft(fft, fft, cv::DFT_SCALE|cv::DFT_COMPLEX_OUTPUT);
-
-		int cx = fft.cols/2;
-		int cy = fft.rows/2;
-
-		Mat q0(fft, Rect(0, 0, cx, cy));   // Top-Left
-		Mat q1(fft, Rect(cx, 0, cx, cy));  // Top-Right
-		Mat q2(fft, Rect(0, cy, cx, cy));  // Bottom-Left
-		Mat q3(fft, Rect(cx, cy, cx, cy)); // Bottom-Right
-
-		Mat tmp; 
-		q0.copyTo(tmp);
-		q3.copyTo(q0);
-		tmp.copyTo(q3);
-
-		q1.copyTo(tmp);
-		q2.copyTo(q1);
-		tmp.copyTo(q2);
-		
-		this->setFFT(fft);
 	}
+	else
+	{
+		vector<Mat> canalesIluminacion;
+		split(picture, canalesIluminacion);
+		this->convertirEspacioColor(canalesIluminacion[this->getIluminacion(this->getEspacioColor())], this->getEspacioColor());
+		canalesIluminacion[this->getIluminacion(this->getEspacioColor())].convertTo(fft, CV_32F);
+	}
+	
+	dft(fft, fft, cv::DFT_SCALE|cv::DFT_COMPLEX_OUTPUT);
+
+	int cx = fft.cols/2;
+	int cy = fft.rows/2;
+
+	Mat q0(fft, Rect(0, 0, cx, cy));   // Top-Left
+	Mat q1(fft, Rect(cx, 0, cx, cy));  // Top-Right
+	Mat q2(fft, Rect(0, cy, cx, cy));  // Bottom-Left
+	Mat q3(fft, Rect(cx, cy, cx, cy)); // Bottom-Right
+
+	Mat tmp; 
+	q0.copyTo(tmp);
+	q3.copyTo(q0);
+	tmp.copyTo(q3);
+
+	q1.copyTo(tmp);
+	q2.copyTo(q1);
+	tmp.copyTo(q2);
+	
+	this->setFFT(fft);
 }
 
 void FFT::inverseFFT()
@@ -232,4 +241,42 @@ bool FFT::operator==(const FFT & f)
 bool FFT::operator!=(const FFT & f)
 {
 	return !(*this == f);
+}
+
+unsigned int FFT::getIluminacion(const enum ESPACIO_COLOR &espacio) const
+{
+	if(espacio == HSV)
+	{
+		return 2;
+	}
+	else
+	{
+		exit(0);
+	}
+}
+
+void FFT::convertirEspacioColor(Mat &picture, const enum ESPACIO_COLOR &espacio)
+{
+	if(RGB) //Restauracion
+	{
+		if(this->getEspacioColor() == HSV)
+		{
+			cvtColor(picture, picture, CV_HSV2BGR);
+		}
+	}
+	else if(espacio == HSV)
+	{
+		cvtColor(picture, picture, CV_BGR2HSV);
+	}
+}
+
+void FFT::setEspacioColor(const enum ESPACIO_COLOR &espacio)
+{
+	assert(espacio != RGB);
+	_espacio = espacio;
+}
+
+enum ESPACIO_COLOR FFT::getEspacioColor() const
+{
+	return _espacio;
 }

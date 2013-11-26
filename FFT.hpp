@@ -6,6 +6,7 @@
 using namespace cv;
 
 enum COMPLEX_NUMBER { COMPLEX, REAL };
+enum ESPACIO_COLOR { HSV, RGB };
 
 class FFT
 {
@@ -75,6 +76,13 @@ public:
 	 * **/
 	unsigned int getCols() const;
 	
+	/** @brief Establece el espacio de color de la clase
+	 * **/
+	void setEspacioColor(const enum ESPACIO_COLOR &espacio);
+	
+	/** @brief Obtiene el espacio de color de la clase **/
+	enum ESPACIO_COLOR getEspacioColor() const;
+	
 	/**
 	 * @brief Libera la imagen y la transformada de fourier **/
 	void release();
@@ -89,6 +97,10 @@ public:
 private:
 	Mat _picture;
 	Mat _fft;
+	enum ESPACIO_COLOR _espacio;
+	
+	void convertirEspacioColor(Mat &picture, const enum ESPACIO_COLOR &espacio);
+	unsigned int getIluminacion(const enum ESPACIO_COLOR &espacio) const;
 };
 
 #endif
