@@ -81,6 +81,8 @@ public:
 	
 	/** Sobrecarga del constructor = **/
 	FFT& operator=(const FFT & f);
+
+	bool operator==(const FFT & f);
 	
 private:
 	Mat _picture;

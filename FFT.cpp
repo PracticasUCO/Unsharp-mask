@@ -3,6 +3,7 @@
 #include <vector>
 #include <opencv2/highgui/highgui.hpp>
 #include "FFT.hpp"
+#include <iostream>
 
 using namespace std;
 using namespace cv;
@@ -137,7 +138,12 @@ void FFT::setFrequency(const unsigned int &fil, const unsigned int &col, const e
 	}
 	else
 	{
-		_fft.at<float>(fil, col, 1) = frequency;
+		vector<Mat> canales;
+		split(_fft, canales);
+		
+		canales[1].at<float>(fil, col) = frequency;
+		
+		merge(canales, _fft);
 	}
 }
 
@@ -148,11 +154,17 @@ float FFT::getFrequency(const unsigned int &fil, const unsigned int &col, const 
 	
 	if(part == REAL)
 	{
-		return _fft.at<float>(fil, col, 0);
+		return _fft.at<float>(fil, col);
 	}
 	else
 	{
-		return _fft.at<float>(fil, col, 1);
+		Mat fft = this->getFFT();
+		vector<Mat> canales;
+		
+		split(fft, canales);
+		assert(canales.size() == 2);
+		
+		return canales[1].at<float>(fil, col);
 	}
 }
 
@@ -177,4 +189,43 @@ FFT& FFT::operator=(const FFT & f)
 	this->setPicture(f.getPicture());
 	this->setFFT(f.getFFT());
 	return *this;
+}
+
+bool FFT::operator==(const FFT & f)
+{
+	bool resultado;
+	Mat fftA = this->getFFT();
+	Mat fftB = f.getFFT();
+	
+	resultado = true;
+	
+	if((this->getRows() != f.getRows()) || (this->getCols() != f.getCols()))
+	{
+		resultado = false;
+	}
+	else
+	{
+		for(unsigned int i = 0; i < this->getRows(); i++)
+		{
+			for(unsigned int j = 0; j < this->getCols(); j++)
+			{
+				float complexA;
+				float complexB;
+				float realA;
+				float realB;
+			
+				complexA = this->getFrequency(i, j, COMPLEX);
+				complexB = f.getFrequency(i, j, COMPLEX);
+				realA = this->getFrequency(i, j, REAL);
+				realB = f.getFrequency(i, j, REAL);
+				
+				if((complexA != complexB) || (realA != realB))
+				{
+					resultado = false;
+					break;
+				}
+			}
+		}
+	}
+	return resultado;
 }
