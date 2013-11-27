@@ -10,4 +10,8 @@ using namespace cv;
 
 namespace FSIV
 {
+	Mat unshark(const Mat &picture, const Mat &mascara)
+	{
+		
+	}
 }

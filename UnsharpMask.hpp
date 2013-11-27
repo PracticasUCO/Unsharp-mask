@@ -13,11 +13,6 @@ namespace FSIV
 
   class UnsharpMask
   {
-  private:
-    double _cutoffFrequency; //!<Cutoff frequency
-    unsigned short int _orderButterworth; //!< Order Butterworth filter
-    double _gain; //!< Gain enhancement
-
   public:
     /** 
 	  * @brief Default Constructor
@@ -79,6 +74,14 @@ namespace FSIV
     {
       return _gain;
     }
+    
+    /** @brief Unsharp picture **/
+	 Mat unshark(const Mat &picture, const Mat &mascara = Mat());
+    
+private:
+	double _cutoffFrequency; //!<Cutoff frequency
+	unsigned short int _orderButterworth; //!< Order Butterworth filter
+	double _gain; //!< Gain enhancement
   };
 }
 

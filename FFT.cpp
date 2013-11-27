@@ -248,7 +248,7 @@ bool FFT::operator!=(const FFT & f)
 
 unsigned int FFT::getIluminacion(const enum ESPACIO_COLOR &espacio) const
 {
-	if((espacio == HSV) || (espacio == HSL))
+	if((espacio == HSV) || (espacio == HLS))
 	{
 		return 2;
 	}
@@ -277,15 +277,15 @@ void FFT::convertirEspacioColor(Mat &picture, const enum ESPACIO_COLOR &espacio)
 		}
 		else if(this->getEspacioColor() == CIE)
 		{
-			cvtColor(picture, picture, CV_CIE2BGR);
+			cvtColor(picture, picture, CV_XYZ2BGR);
 		}
 		else if(this->getEspacioColor() == YCrCb)
 		{
 			cvtColor(picture, picture, CV_YCrCb2BGR);
 		}
-		else if(this->getEspacioColor() == HSL)
+		else if(this->getEspacioColor() == HLS)
 		{
-			cvtColor(picture, picture, CV_HSL2BGR);
+			cvtColor(picture, picture, CV_HLS2BGR);
 		}
 		else
 		{
@@ -298,15 +298,15 @@ void FFT::convertirEspacioColor(Mat &picture, const enum ESPACIO_COLOR &espacio)
 	}
 	else if(espacio == CIE)
 	{
-		cvtColor(picture, picture, CV_BGR2CIE);
+		cvtColor(picture, picture, CV_BGR2XYZ);
 	}
 	else if(espacio == YCrCb)
 	{
 		cvtColor(picture, picture, CV_BGR2YCrCb);
 	}
-	else i(espacio == HSL)
+	else if(espacio == HLS)
 	{
-		cvtColor(picture, picture, CV_BGR2HSL);
+		cvtColor(picture, picture, CV_BGR2HLS);
 	}
 	else
 	{
