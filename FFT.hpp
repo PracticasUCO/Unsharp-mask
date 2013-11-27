@@ -87,6 +87,9 @@ public:
 	 * @brief Libera la imagen y la transformada de fourier **/
 	void release();
 	
+	/** @brief Aplica el filtro butterworth sobre el espectro (cambia el espectro) **/
+	void butterworth();
+	
 	/** Sobrecarga del constructor = **/
 	FFT& operator=(const FFT & f);
 
