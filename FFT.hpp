@@ -88,7 +88,7 @@ public:
 	void release();
 	
 	/** @brief Aplica el filtro butterworth sobre el espectro (cambia el espectro) **/
-	void butterworth();
+	void butterworth(const double &cutOfFrequency, const unsigned int &orden);
 	
 	/** Sobrecarga del constructor = **/
 	FFT& operator=(const FFT & f);

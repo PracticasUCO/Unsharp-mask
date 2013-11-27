@@ -5,6 +5,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "FFT.hpp"
 #include <iostream>
+#include <cmath>
 using namespace std;
 using namespace cv;
 
@@ -324,4 +325,31 @@ void FFT::setEspacioColor(const enum ESPACIO_COLOR &espacio)
 enum ESPACIO_COLOR FFT::getEspacioColor() const
 {
 	return _espacio;
+}
+
+void FFT::butterworth(const double &cutOfFrequency, const unsigned int &orden)
+{
+	assert(!_fft.empty());
+	assert((cutOfFrequency >= 0) && (cutOfFrequency <= 1));
+	
+	for(unsigned int i = 0; i < this->getRows(); i++)
+	{
+		for(unsigned int j = 0; i < this->getCols(); j++)
+		{
+			float real;
+			float compleja;
+			
+			real = this->getFrequency(i, j, REAL);
+			compleja = this->getFrequency(i, j, COMPLEX);
+			
+			real /= cutOfFrequency;
+			compleja /= cutOfFrequency;
+			
+			real = pow(real, 2*orden);
+			compleja = pow(compleja, 2*orden);
+			
+			this->setFrequency(i, j, REAL, real);
+			this->setFrequency(i, j, COMPLEX, compleja);
+		}
+	}
 }
