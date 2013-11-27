@@ -6,7 +6,7 @@
 using namespace cv;
 
 enum COMPLEX_NUMBER { COMPLEX, REAL };
-enum ESPACIO_COLOR { HSV, RGB, CIE, YCrCb };
+enum ESPACIO_COLOR { HSV, RGB, CIE, YCrCb, HSL };
 
 class FFT
 {

@@ -248,7 +248,7 @@ bool FFT::operator!=(const FFT & f)
 
 unsigned int FFT::getIluminacion(const enum ESPACIO_COLOR &espacio) const
 {
-	if(espacio == HSV)
+	if((espacio == HSV) || (espacio == HSL))
 	{
 		return 2;
 	}
@@ -262,6 +262,7 @@ unsigned int FFT::getIluminacion(const enum ESPACIO_COLOR &espacio) const
 	}
 	else
 	{
+		cerr << "Error al tratar de sacar la iluminacion: Espacio de color irreconocible" << endl;
 		exit(0);
 	}
 }
@@ -282,6 +283,14 @@ void FFT::convertirEspacioColor(Mat &picture, const enum ESPACIO_COLOR &espacio)
 		{
 			cvtColor(picture, picture, CV_YCrCb2BGR);
 		}
+		else if(this->getEspacioColor() == HSL)
+		{
+			cvtColor(picture, picture, CV_HSL2BGR);
+		}
+		else
+		{
+			cerr << "Error al restaurar el espacio de color de la imagen ? to BGR" << endl;
+		}
 	}
 	else if(espacio == HSV)
 	{
@@ -294,6 +303,15 @@ void FFT::convertirEspacioColor(Mat &picture, const enum ESPACIO_COLOR &espacio)
 	else if(espacio == YCrCb)
 	{
 		cvtColor(picture, picture, CV_BGR2YCrCb);
+	}
+	else i(espacio == HSL)
+	{
+		cvtColor(picture, picture, CV_BGR2HSL);
+	}
+	else
+	{
+		cerr << "Error al convertir el espacio de color BGR to ?" << endl;
+		exit(0);
 	}
 }
 
