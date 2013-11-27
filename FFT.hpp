@@ -6,7 +6,7 @@
 using namespace cv;
 
 enum COMPLEX_NUMBER { COMPLEX, REAL };
-enum ESPACIO_COLOR { HSV, RGB };
+enum ESPACIO_COLOR { HSV, RGB, CIE, YCrCb };
 
 class FFT
 {
@@ -15,7 +15,7 @@ public:
 	 * @brief Default constructor
 	 * @param picture Picture to be transformed
 	 * **/
-	FFT(const Mat &picture = cv::Mat());
+	FFT(const Mat &picture = cv::Mat(), const ESPACIO_COLOR &espacio = HSV);
 	
 	/** @brief Copy Constructor
 	 *  @param f FFT to be copied
